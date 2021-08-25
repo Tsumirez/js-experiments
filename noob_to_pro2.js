@@ -70,19 +70,42 @@ const testItems = [
 //total variable updated each line, which takes a lot of tracking for the reader.
 //item price is set as const, so it's one time only. Rest are just fixed modifiers.
 
+// const TAX_RATE = 1.1
+// const SHIPPING_DEFAULT = 5
+
+// function calculateTotal (items, {shipping = SHIPPING_DEFAULT, discount = 0} = {}) {
+//     if(items == null || items.length === 0) return 0
+
+//     const itemCost = items.reduce((total, item) => {
+//         return total + item.price * item.quantity
+//     },0)
+//     const discountRate = 1 - discount;
+
+//     return itemCost * discountRate * TAX_RATE + shipping
+// }
+
+// console.log(calculateTotal())
+// console.log(calculateTotal(testItems))
+
+// console.log(calculateTotal())
+// console.log(calculateTotal(testItems))
+
+//MY version (written after advanved and pro):
+
 const TAX_RATE = 1.1
 const SHIPPING_DEFAULT = 5
 
-function calculateTotal (items, {shipping = SHIPPING_DEFAULT, discount = 0} = {}) {
-    if(items == null || items.length === 0) return 0
+let calculateTotal = (itemsArr=[], {discount=0, shipping=SHIPPING_DEFAULT}={}) => {
+    if(!(itemsArr instanceof Array && itemsArr.length)) return 0;
+    
+    let itemCost = itemsArr.reduce((totalPrice,item)=> {
+        return totalPrice+item.price*item.quantity
+        },0);
 
-    const itemCost = items.reduce((total, item) => {
-        return total + item.price * item.quantity
-    },0)
     const discountRate = 1 - discount;
-
-    return itemCost * discountRate * TAX_RATE + shipping
+    return itemCost * discountRate * TAX_RATE + shipping;
 }
 
+
 console.log(calculateTotal())
-console.log(calculateTotal(testItems))
+console.log(calculateTotal(testItems,"error"))
