@@ -108,4 +108,4 @@ let calculateTotal = (itemsArr=[], {discount=0, shipping=SHIPPING_DEFAULT}={}) =
 
 
 console.log(calculateTotal())
-console.log(calculateTotal(testItems,"error"))
+console.log(calculateTotal(testItems,null))
